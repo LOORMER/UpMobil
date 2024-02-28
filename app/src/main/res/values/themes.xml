@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.PracticPhoneRemade" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.Prack_1" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.PracticPhoneRemade" parent="Base.Theme.PracticPhoneRemade" />
+    <style name="Theme.Prack_1" parent="Base.Theme.Prack_1" />
 </resources>

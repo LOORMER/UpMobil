@@ -1,4 +1,4 @@
-package com.example.practicphoneremade
+package ru.btpit.nmedia
 
 import org.junit.Test
 
