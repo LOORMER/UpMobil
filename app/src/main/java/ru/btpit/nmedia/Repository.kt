@@ -19,6 +19,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             isLike = false,
             amountlike = 999,
             amountrepost = 15,
+            amountview = 500,
             isRepos = false
         ),
         Post(
@@ -29,8 +30,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             isLike = false,
             amountlike = 0,
             amountrepost = 0,
-            isRepos = false,
-
+            amountview = 0,
+            isRepos = false
             ),
 
         )
@@ -52,12 +53,10 @@ class PostRepositoryInMemoryImpl : PostRepository {
     }
 
     override fun repos(id: Int) {
-
         post = post.map {
             if (it.id != id) it else {
                 it.copy(amountrepost = it.amountrepost + 10)
             }
-
         }
         data.value = post
     }

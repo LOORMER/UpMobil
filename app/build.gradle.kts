@@ -8,7 +8,7 @@ android {
     compileSdk = 34
 
     buildFeatures.viewBinding = true
-
+    buildFeatures.dataBinding = true
 
     defaultConfig {
         applicationId = "ru.btpit.nmedia"
