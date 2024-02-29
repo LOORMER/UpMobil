@@ -27,7 +27,7 @@
             app:srcCompat="@drawable/btpitlogo" />
 
         <LinearLayout
-            android:layout_width="320dp"
+            android:layout_width="294dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
@@ -52,6 +52,20 @@
                 tools:layout_editor_absoluteX="72dp" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/menu"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/miscdots"
+                android:clickable="true" />
+        </LinearLayout>
+
     </LinearLayout>
 
 
@@ -86,6 +100,7 @@
             android:layout_margin="5dp"
             android:adjustViewBounds="false"
             android:background="@drawable/likeoff"
+            android:clickable="true"
             android:cropToPadding="false"
             android:scaleX="1"
             android:scaleY="1">
@@ -104,7 +119,8 @@
             android:layout_height="25dp"
             android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:background="@drawable/repost">
+            android:background="@drawable/repost"
+            android:clickable="true">
 
         </ImageButton>
 

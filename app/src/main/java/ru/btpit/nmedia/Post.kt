@@ -1,7 +1,7 @@
 package ru.btpit.nmedia
 
 data class Post (
-    val id:Int,
+    val id:Long,
     val header:String,
     val content: String,
     val dataTime:String,

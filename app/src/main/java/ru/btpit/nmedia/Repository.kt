@@ -5,12 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 interface PostRepository {
     fun get(): LiveData<List<Post>>
-    fun likeById(id:Int)
-    fun repos(id: Int)
+    fun likeById(id:Long)
+    fun shareById(id:Long)
+    fun repos(id: Long)
+    fun removeById(id: Long)
 }
 
 class PostRepositoryInMemoryImpl : PostRepository {
-    private var post = listOf(
+    private var posts = listOf(
         Post(
             id = 1,
             header = "ГПБОУ ВО БТПИТ",
@@ -36,11 +38,11 @@ class PostRepositoryInMemoryImpl : PostRepository {
 
         )
 
-    private val data = MutableLiveData(post)
+    private val data = MutableLiveData(posts)
 
     override fun get(): LiveData<List<Post>> = data
-    override fun likeById(id: Int) {
-        post = post.map {
+    override fun likeById(id: Long) {
+        posts = posts.map {
             if (it.id != id) it else {
                 if (it.isLike)
                     it.amountlike--
@@ -49,23 +51,38 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 it.copy(isLike = !it.isLike)
             }
         }
-        data.value = post
+        data.value = posts
     }
 
-    override fun repos(id: Int) {
-        post = post.map {
+    override fun repos(id: Long) {
+        posts = posts.map {
             if (it.id != id) it else {
                 it.copy(amountrepost = it.amountrepost + 10)
             }
         }
-        data.value = post
+        data.value = posts
+    }
+
+    override fun shareById(id: Long) {
+        posts = posts.map {
+            if (it.id != id) it else {
+                it.amountrepost++
+                it.copy(isRepos = !it.isRepos)
+            }
+        }
+        data.value = posts
+    }
+    override fun removeById(id: Long) {
+        posts = posts.filter { it.id != id}
+        data.value = posts
     }
 }
-
 
 class PostViewModel : ViewModel() {
     private val repository: PostRepository = PostRepositoryInMemoryImpl()
     val data = repository.get()
-    fun likeById(id: Int) = repository.likeById(id)
-    fun repos(id: Int) = repository.repos(id)
+    fun likeById(id: Long) = repository.likeById(id)
+    fun shareById(id:Long) = repository.shareById(id)
+    fun repos(id: Long) = repository.repos(id)
+    fun removeById(id : Long) = repository.removeById(id)
 }
