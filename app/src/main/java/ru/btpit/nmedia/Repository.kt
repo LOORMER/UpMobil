@@ -9,6 +9,7 @@ interface PostRepository {
     fun shareById(id:Long)
     fun repos(id: Long)
     fun removeById(id: Long)
+    fun save(post : Post)
 }
 
 class PostRepositoryInMemoryImpl : PostRepository {
@@ -76,11 +77,50 @@ class PostRepositoryInMemoryImpl : PostRepository {
         posts = posts.filter { it.id != id}
         data.value = posts
     }
+    override fun save(post: Post) {
+        posts = listOf(
+            post.copy(
+                id = nextId++,
+                header = "Me",
+                isLike = false,
+                isRepos = false,
+                dataTime = "now"
+            )
+        ) + posts
+        data.value = posts
+        return
+    }
 }
+private val empty = Post(
+    id = 0,
+    content = "",
+    amountview = 0,
+    amountlike = 0,
+    amountrepost = 0,
+    dataTime = "",
+    header = "",
+    isLike = false,
+    isRepos = false
+)
 
 class PostViewModel : ViewModel() {
     private val repository: PostRepository = PostRepositoryInMemoryImpl()
     val data = repository.get()
+    val edited = MutableLiveData(empty)
+    fun save() {
+        edited.value?.let {
+            repository.save(it)
+        }
+        edited.value = empty
+    }
+    fun changeContent(content: String) {
+        edited.value?.let {
+            val text = content.trim()
+            if (it.content == text)
+                return
+            edited.value = it.copy(content = text)
+        }
+    }
     fun likeById(id: Long) = repository.likeById(id)
     fun shareById(id:Long) = repository.shareById(id)
     fun repos(id: Long) = repository.repos(id)
