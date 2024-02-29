@@ -6,14 +6,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/back"
         android:orientation="horizontal">
 
         <ImageView
@@ -24,22 +27,22 @@
             app:srcCompat="@drawable/btpitlogo" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="320dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textViewHeader"
-                android:layout_width="131dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="5dp"
+                android:id="@+id/header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="ГБПОУ ВО &quot;БТПИТ&quot;"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="72dp"
                 tools:layout_editor_absoluteY="6dp" />
 
             <TextView
-                android:id="@+id/textViewDateTime"
+                android:id="@+id/dateTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -51,65 +54,88 @@
         </LinearLayout>
     </LinearLayout>
 
+
     <TextView
-        android:id="@+id/textViewContent"
+        android:id="@+id/Content"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="-1dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/back"
         android:text="✅ Подать заявление на участие в дистанционном электронном голосовании до 11 марта 2024 года
 ✅ Выбрать удобный избирательный участок для голосования и подать заявление до 11 марта 2024 года
-✅ Узнайте о возможностях для избирателей на «Госуслугах»" />
-
-
+✅ Узнайте о возможностях для избирателей на «Госуслугах»"
+        android:textAlignment="textStart" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="61dp"
+        android:layout_height="33dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="-1dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/back"
         android:gravity="center_vertical">
 
         <ImageButton
-            android:id="@+id/imagebutnlike"
-            android:layout_width="30dp"
+            android:id="@+id/likeButton"
+            android:layout_width="25dp"
             android:layout_height="25dp"
+            android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:background="@drawable/likes">
+            android:adjustViewBounds="false"
+            android:background="@drawable/likeoff"
+            android:cropToPadding="false"
+            android:scaleX="1"
+            android:scaleY="1">
 
         </ImageButton>
 
         <TextView
-            android:id="@+id/textViewLike"
-            android:layout_width="60dp"
+            android:id="@+id/like"
+            android:layout_width="wrap_content"
             android:layout_height="18dp"
-            android:text="0">
-        </TextView>
+            android:text="0"></TextView>
+
         <ImageButton
-            android:id="@+id/imagebutnRepost"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:id="@+id/repostButton"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
             android:layout_margin="5dp"
             android:background="@drawable/repost">
 
         </ImageButton>
 
         <TextView
-            android:id="@+id/textViewRepost"
-            android:layout_width="60dp"
+            android:id="@+id/repost"
+            android:layout_width="wrap_content"
             android:layout_height="18dp"
             android:text="0"></TextView>
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="95dp"
-            app:srcCompat="@android:drawable/ic_menu_view"></ImageView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|end"
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="40dp"
-            android:layout_height="18dp"
-            android:layout_marginLeft="4dp"
-            android:text="5">
-        </TextView>
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                app:srcCompat="@drawable/view"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:layout_gravity="center|right"
+                android:layout_marginEnd="5dp"
+                android:text="500"></TextView>
+        </LinearLayout>
 
 
     </LinearLayout>
+
 </LinearLayout>
