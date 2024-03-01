@@ -3,15 +3,19 @@ package ru.btpit.nmedia
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.Toast
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.btpit.nmedia.databinding.PostCardBinding
 
-typealias OnLikeListener = (post : Post) -> Unit
-typealias OnRemoveListener = (post : Post) -> Unit
-typealias OnShareListener = (post : Post) -> Unit
-
+interface onInteractionListener {
+    fun onLike(post : Post) {}
+    fun onEdit(post : Post) {}
+    fun onRemove(post : Post) {}
+    fun onShare(post:Post) {}
+}
 class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
     override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
         return oldItem == newItem
@@ -24,9 +28,7 @@ class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
 
 class PostViewHolder(
     private val binding: PostCardBinding,
-    private val onLikeListener: OnLikeListener,
-    private val onShareListener: OnShareListener,
-    private val onRemoveListener: OnRemoveListener
+    private val onInteractionListener: onInteractionListener
 )  : RecyclerView.ViewHolder(binding.root) {
     fun bind(post: Post) {
         binding.apply {
@@ -42,20 +44,25 @@ class PostViewHolder(
                     R.drawable.likeoff
             )
             likeButton.setOnClickListener{
-                onLikeListener(post)
+                onInteractionListener.onLike(post)
             }
             repostButton.setOnClickListener{
-                onShareListener(post)
+                onInteractionListener.onShare(post)
             }
-            menu.setOnClickListener{
+            menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
                     inflate(R.menu.options_post)
                     setOnMenuItemClickListener { item ->
                         when (item.itemId) {
                             R.id.remove -> {
-                                onRemoveListener(post)
+                                onInteractionListener.onRemove(post)
                                 true
                             }
+                            R.id.edit -> {
+                                onInteractionListener.onEdit(post)
+                                true
+                            }
+
                             else -> false
                         }
                     }
@@ -66,17 +73,13 @@ class PostViewHolder(
 }
 
 class PostsAdapter(
-    private val onLikeListener: OnLikeListener,
-    private val onShareListener: OnShareListener,
-    private val onRemoveListener: OnRemoveListener
+    private val onInteractionListener: onInteractionListener
 ) : ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = PostCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PostViewHolder(binding,
-            onLikeListener,
-            onShareListener,
-            onRemoveListener
+            onInteractionListener
         )
     }
 
